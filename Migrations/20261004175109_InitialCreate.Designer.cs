@@ -11,8 +11,8 @@ using minimal_api.Infraestrutura.Db;
 namespace minimal_api.Migrations
 {
     [DbContext(typeof(DbContexto))]
-    [Migration("20261004154203_AdministradorMigration")]
-    partial class AdministradorMigration
+    [Migration("20261004175109_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,15 @@ namespace minimal_api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Administradores");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            Email = "admteste@gmail.com",
+                            Perfil = "Admin",
+                            Senha = "123456"
+                        });
                 });
 #pragma warning restore 612, 618
         }

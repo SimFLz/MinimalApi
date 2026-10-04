@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace minimal_api.Migrations
 {
     /// <inheritdoc />
-    public partial class AdministradorMigration : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,6 +32,11 @@ namespace minimal_api.Migrations
                     table.PrimaryKey("PK_Administradores", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "Administradores",
+                columns: new[] { "Id", "Email", "Perfil", "Senha" },
+                values: new object[] { 2, "admteste@gmail.com", "Admin", "123456" });
         }
 
         /// <inheritdoc />

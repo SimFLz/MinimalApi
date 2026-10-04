@@ -6,9 +6,23 @@ namespace minimal_api.Infraestrutura.Db
     public class DbContexto : DbContext
     {
         private readonly IConfiguration _configuracaoAppSettings;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Administrador>().HasData(
+                new Administrador
+                {
+                    Id = 2,
+                    Email = "admteste@gmail.com",
+                    Senha = "123456",
+                    Perfil = "Admin"
+                }
+            );
+        }
         public DbContexto(IConfiguration configuracaoAppSettings)
         {
-            _configuracaoAppSettings = configuracaoAppSettings;        }
+            _configuracaoAppSettings = configuracaoAppSettings;
+        }
         public DbSet<Administrador> Administradores {get; set;} = default!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
