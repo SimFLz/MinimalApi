@@ -9,6 +9,8 @@ using minimal_api.Infraestrutura.Db;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IAdministradorServico, AdministradorServico>();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DbContexto>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("mysql");
@@ -18,7 +20,8 @@ builder.Services.AddDbContext<DbContexto>(options =>
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
-
+app.UseSwagger();
+app.UseSwaggerUI();
 app.MapPost("/Login", ([FromBody] LoginDTO loginDTO, IAdministradorServico administradorServico) =>
 {
     if(administradorServico.Login(loginDTO) != null)
